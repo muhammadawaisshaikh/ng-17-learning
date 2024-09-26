@@ -16,6 +16,8 @@ interface User {
   styleUrl: './listing.component.scss'
 })
 export class ListingComponent {
+  filteredUsers: User[] =[];
+
   users: User[] = [
     {
       img: 'https://nursinginstitutegoa.org/wp-content/uploads/2016/01/tutor-8.jpg',
@@ -35,5 +37,13 @@ export class ListingComponent {
       country: "United States",
       salary: 2000
     }
-  ]
+  ];
+
+  ngOnInit(): void {
+    this.filteredUsers = this.users;
+  }
+
+  onSearch(event: any) {
+    this.filteredUsers = this.users.filter(q => q.name.toLowerCase().includes(event.target.value.toLowerCase()));
+  }
 }
